@@ -1,14 +1,18 @@
-dirs=["..\input\qc_test_subsets\subset100\segments\*bcd*.jpg" 
+dirs=["..\input\qc_test_subsets\subset100s\segments\*bcd*.jpg" 
+"..\input\qc_test_subsets\subset100s\segments\*clc*.jpg"
+"..\input\qc_test_subsets\subset100\segments\*bcd*.jpg" 
 "..\input\qc_test_subsets\subset100\segments\*clc*.jpg" 
 "..\input\qc_test_subsets\subset150\segments\*bcd*.jpg" 
 "..\input\qc_test_subsets\subset150\segments\*clc*.jpg"]
 
-outs=["..\output\summary100cbd.txt" 
+outs=["..\output\summary100sbcd.txt" 
+"..\output\summary100sclc.txt" 
+"..\output\summary100bcd.txt" 
 "..\output\summary100clc.txt" 
 "..\output\summary150bcd.txt" 
 "..\output\summary150clc.txt"]
 
-for k = 1:4
+for k = 1:6
     files=dir(dirs(k));
 
     names = [];
@@ -36,12 +40,7 @@ for k = 1:4
         [sharpnessScore map]= MLVSharpnessMeasure(a);
         sharpnessValues = [sharpnessValues sharpnessScore];
     end
-
-    % dlmwrite('..\output\names.txt',names,'delimiter',',');
-    % dlmwrite('..\output\complexityValues.txt',complexityValues,'delimiter','');
-    % dlmwrite('..\output\colourfulnessValues.txt',colourfulnessValues,'delimiter','');
-    % dlmwrite('..\output\contrastValues.txt',contrastValues,'delimiter','');
-    % dlmwrite('..\output\sharpnessValues.txt',sharpnessValues,'delimiter','');
+    
     all_results = transpose(cat(1,names,complexityValues,colourfulnessValues,contrastValues,sharpnessValues))
     i = length(names)
     filePh = fopen(outs(k),'w');
